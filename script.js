@@ -1,5 +1,5 @@
 const poke_container = document.getElementById('poke-container')
-const pokemon_count = 150
+const pokemon_count = 5
 const colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
@@ -17,13 +17,25 @@ const colors = {
 	normal: '#F5F5F5'
 }
 
-let getData = async() => {
-    let response = await fetch("https:pokeapi.co/api/v2/pokemon/");
-    let data = await response.json();
-    
-    let printName = document.getElementById("pokeName1");
-    printName.innerHTML = data.results[0].name;
+const pokeIterator = async() => {
+	for (let i = 1; i <= pokemon_count; i++) {
+		await getData(i);
+	}
 }
 
-getData();
+const getData = async(id) => {
+	let response = await fetch(`https:pokeapi.co/api/v2/pokemon/${id}`);
+    let data = await response.json();
+	console.log(data);
+	printPokemon(data);
+}
 
+const printPokemon = (data) => {	
+	let printName = document.querySelector(".name");
+	printName.innerHTML = `${data.name}`;
+	
+	// let printImg = document.querySelector(".img-container");
+	// printImg.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/`${id}`.png';
+}
+
+pokeIterator();
