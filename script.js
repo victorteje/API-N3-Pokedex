@@ -31,11 +31,18 @@ const getData = async(id) => {
 }
 
 const printPokemon = (data) => {	
+	let printNumber = document.querySelector(".number");
+	printNumber.innerHTML = `${data.id}`;
+
 	let printName = document.querySelector(".name");
 	printName.innerHTML = `${data.name}`;
+
+	let printType = document.querySelector(".type");
+	printType.innerHTML = `${data.types[0].type.name}`;
 	
 	// let printImg = document.querySelector(".img-container");
-	// printImg.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/`${id}`.png';
+	// printImg.innerHTML
+	
 }
 
 pokeIterator();
