@@ -1,5 +1,5 @@
 const poke_container = document.getElementById('poke-container')
-const pokemon_count = 5
+const pokemon_count = 18
 const colors = {
     fire: '#FDDFDF',
     grass: '#DEFDE0',
@@ -30,19 +30,30 @@ const getData = async(id) => {
 	printPokemon(data);
 }
 
-const printPokemon = (data) => {	
-	let printNumber = document.querySelector(".number");
-	printNumber.innerHTML = `${data.id}`;
-
-	let printName = document.querySelector(".name");
-	printName.innerHTML = `${data.name}`;
-
-	let printType = document.querySelector(".type");
-	printType.innerHTML = `${data.types[0].type.name}`;
+const printPokemon = (data) => {
+	let card = document.createElement("div");
+	card.classList.add("pokemon");
+	poke_container.appendChild(card);
 	
-	// let printImg = document.querySelector(".img-container");
-	// printImg.innerHTML
+	let type = data.types[0].type.name;
+	let cardBackground = colors[type];
+	card.style.backgroundColor = cardBackground
 	
+
+	
+	let imageSource = data.sprites.other['official-artwork'].front_default;
+
+	let cardInfo =
+		`<div class="img-container">
+			<img src=${imageSource} alt=${data.name}>
+		</div>
+		<div class="info">
+			<span class="number">${data.id}</span>
+			<h3 class="name">${data.name}</h3>
+			<small class="type">Type: ${data.types[0].type.name}<span></span></small>
+		</div>`;
+	
+	card.innerHTML = cardInfo;
 }
 
 pokeIterator();
